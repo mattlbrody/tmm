@@ -1,0 +1,13 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"displayname": {
+			"name": "displayname",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "displayname",
+			"order": 0
+		}
+	}
+}
