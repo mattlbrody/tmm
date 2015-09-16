@@ -6,6 +6,7 @@ angular.module('myApp', [
   'myApp.view1',
   'uiGmapgoogle-maps',
   'myApp.login',
+  'myApp.profile',
   'myApp.register',
   'myApp.version'
 ]).

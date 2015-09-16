@@ -8,6 +8,30 @@
 			"required": false,
 			"id": "displayname",
 			"order": 0
+		},
+		"icon": {
+			"name": "icon",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "icon",
+			"order": 1
+		},
+		"coord": {
+			"name": "coord",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "coord",
+			"order": 2
+		},
+		"open": {
+			"name": "open",
+			"type": "boolean",
+			"typeLabel": "boolean",
+			"required": false,
+			"id": "open",
+			"order": 3
 		}
 	}
 }

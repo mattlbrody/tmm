@@ -52,8 +52,10 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/login">Login</a></li>
+        <li id="login"><a href="#/login">Login</a></li>
+        <li id="logout"><a href="" id="logout-btn">logout</a></li>
         <li><a href="#/register">Register</a></li>
+        <li><a href="#/profile">edit profile</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -73,6 +75,7 @@
   <script src="app.js"></script>
   <script src="view1/view1.js"></script>
   <script src="login/login.js"></script>
+  <script src="profile/profile.js"></script>
   <script src="register/register.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
@@ -80,7 +83,25 @@
   <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
   <script src="bower_components/angular-google-maps/dist/angular-google-maps.min.js"></script>
   <script src="bower_components/lodash/lodash.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      dpd.users.me(function(user) {
+        if (user) {
+          $("#login").hide();
+        }else {
+          $("#logout").hide();
+        }
+      });
+    $('#logout-btn').click(function() {
+      dpd.users.logout(function(res, err) {
+        location.href = "#/view1";
+      });
+      $("#logout").hide();
+      $("#login").show();
+    });
 
+    });
+  </script>
 
 </body>
 </html>

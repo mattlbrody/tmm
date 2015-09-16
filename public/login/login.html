@@ -6,7 +6,7 @@
       <label for="password">Password:</label>
       <input type="password" id="password" /><br />
       <button type="submit" class="btn btn-primary">Login</button>
-      <a href="../register.html" class="btn btn-link">sign up</a>
+      <a href="#/register" class="btn btn-link">sign up</a>
     </form>
   </div>
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -14,7 +14,7 @@
   <script type="text/javascript">
     dpd.users.me(function(user) {
       if (user) {
-        location.href = "/index.html";
+        location.href = "#/view1";
       }
     });
 
@@ -26,10 +26,9 @@
         if (error) {
           alert(error.message);
         } else {
-          location.href = "/index.html";
+          location.href = "#/view1";
         }
       });
-
       return false;
     });
   </script>
