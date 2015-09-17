@@ -11,6 +11,16 @@ angular.module('myApp.view1', ['ngRoute', 'uiGmapgoogle-maps'])
 
 .controller('View1Ctrl', ['$scope', function($scope) {
   $scope.map = {
+      //this styles doesn't remove poi like it should, sent request through github for answer
+      styles: [
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        }
+      ],
       center: {
         latitude: 37.787191,
         longitude: -122.399027
