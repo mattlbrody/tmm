@@ -10,17 +10,55 @@ angular.module('myApp.view1', ['ngRoute', 'uiGmapgoogle-maps'])
 }])
 
 .controller('View1Ctrl', ['$scope', function($scope) {
+  
+    dpd.users.get(function(users, error) {
+      users.forEach(function(user) {
+        var id = user.id;
+        var icon = user.icon;
+        var coord = user.coord;
+          console.log(id)
+      })
+    })
+
+    var map;
+
+    function initialize() {
+       var myLatlng1;
+
+       var mapOptions = {
+           zoom: 18,
+           center: myLatlng1,
+           mapTypeId: google.maps.MapTypeId.ROADMAP,
+           styles: [
+              {
+                "featureType": "poi",
+                "stylers": [
+                  { "visibility": "off" }
+                ]
+              }
+            ]
+        };
+
+       var image = 'http://ladiesloot.com/wp-content/uploads/2015/05/smiley-face-1-4-15.png';
+        var marker = new google.maps.Marker({
+          position: {lat: 37.892729, lng: -122.113632},
+          map: map,
+          icon: image
+        });
+
+       var map = new google.maps.Map(document.getElementById('map'),
+       mapOptions);
+
+       if (navigator.geolocation) {
+           navigator.geolocation.getCurrentPosition(function (position) {
+               var initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+               map.setCenter(initialLocation);
+           });
+       }
+    }
+    initialize();
+
   $scope.map = {
-      //this styles doesn't remove poi like it should, sent request through github for answer
-      styles: [
-        {
-          featureType: "poi",
-          elementType: "labels",
-          stylers: [
-            { visibility: "off" }
-          ]
-        }
-      ],
       center: {
         latitude: 37.787191,
         longitude: -122.399027

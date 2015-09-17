@@ -22,21 +22,60 @@ angular.module('myApp.profile', ['ngRoute'])
       
       //submits form for updates
       $('.form').submit(function() {
-        var username = $('#username').val();
         var displayname = $('#displayname').val();
         var icon = $('#base').text()
-        console.log(icon)
-
 
         //code to connect updates with deployd data
-        dpd.users.put(id,{displayname: displayname, icon: icon}, function(session, error) {
-          if (error) {
-            alert(error.message);
-          }else {
-            alert("info updated")
-          }
-        });
+        if(icon == "") {
+          dpd.users.put(id,{displayname: displayname}, function(session, error) {
+            if (error) {
+              alert(error.message);
+            }else {
+              alert("info updated")
+            }
+          })
+        }else {
+          dpd.users.put(id,{displayname: displayname, icon: icon}, function(session, error) {
+            if (error) {
+              alert(error.message);
+            }else {
+              alert("info updated")
+            }
+          })
+        }
       });
+
+      //retrieves geoloacation data
+       var options = {
+          enableHighAccuracy: true,
+          timeout: 5000,
+          maximumAge: 0
+        };
+
+        //if successful, store in deployd
+        function success(pos) {
+          var latitude = pos.coords.latitude;
+          var longitude = pos.coords.longitude
+          var crd = {
+            latitude,
+            longitude
+          };
+
+          dpd.users.put(id,{coord: crd}, function(session, error) {
+            if (error) {
+              alert(error.message);
+            }
+          })
+          console.log('Your current position is:');
+          console.log('Latitude : ' + crd.latitude);
+          console.log('Longitude: ' + crd.longitude);
+        };
+
+        function error(err) {
+          console.warn('ERROR(' + err.code + '): ' + err.message);
+        };
+
+        navigator.geolocation.getCurrentPosition(success, error, options);
 
       //if open is true, then add check to the open checkbox, otherwise no check 
       var updateCheckbox = function() {
@@ -71,46 +110,6 @@ angular.module('myApp.profile', ['ngRoute'])
       $("#truckicon").change(function(){
           readImage( this );
       });
-
-      //fileuploader js
-      // var files = [];
-
-      // var uploadFiles = function() {
-
-      //     var fd = new FormData()
-      //     for (var i in files) {
-      //         fd.append("uploadedFile", files[i])
-      //     }
-
-      //     var subdir = $('#subdir').val();
-      //     var comments = $('#comments').val();
-      //     var uniqueFilename = $('#uniqueFilename').prop('checked');
-      //     var xhr = new XMLHttpRequest();
-      //     xhr.open('POST', '/upload?subdir=' + subdir + '&comments=' + comments + '&uniqueFilename=' + uniqueFilename); 
-      //     xhr.onload = function() {
-      //         var response = JSON.parse(this.responseText);
-      //         console.log(response);
-      //         $('.alert-success').append("Upload successful!<br />");
-      //         for (var index in response) {
-      //            appendUploadedFileToTable(response[index]);
-      //         }
-      //     };
-      //     xhr.onerror = function(err) {
-      //         alert("Error: ", err);
-      //     }
-      //     xhr.send(fd);
-
-      // };
-
-      // var setFiles = function(element) {
-      //   console.log('files:', element.files);
-      //   // Turn the FileList object into an Array
-      //     files = [];
-      //     for (var i = 0; i < element.files.length; i++) {
-      //       files.push(element.files[i]);
-      //     }
-      // };  
-      // console.log(setFiles)
 
     });
 }]);
