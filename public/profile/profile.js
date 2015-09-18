@@ -25,7 +25,7 @@ angular.module('myApp.profile', ['ngRoute'])
         var displayname = $('#displayname').val();
         var icon = $('#base').text()
 
-        //code to connect updates with deployd data
+        //code to connect updates with deployd data and ensure image is not deleted
         if(icon == "") {
           dpd.users.put(id,{displayname: displayname}, function(session, error) {
             if (error) {
@@ -76,6 +76,7 @@ angular.module('myApp.profile', ['ngRoute'])
         };
 
         navigator.geolocation.getCurrentPosition(success, error, options);
+
 
       //if open is true, then add check to the open checkbox, otherwise no check 
       var updateCheckbox = function() {

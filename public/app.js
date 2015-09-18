@@ -5,6 +5,7 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.view1',
   'uiGmapgoogle-maps',
+  'ngMap',
   'myApp.login',
   'myApp.profile',
   'myApp.register',
