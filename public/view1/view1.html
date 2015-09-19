@@ -1,15 +1,8 @@
-<!-- <ui-gmap-google-map center="map.center" zoom="map.zoom">
-    <ui-gmap-markers models="map.markers" coords="'coords'" icon="'icon'">
-    </ui-gmap-markers>
-</ui-gmap-google-map> -->
-
-<!-- <div onload="initialize()" id="map" style="width: 100%; height: 650px;"></div>
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> -->
 <div map-lazy-load="http://maps.google.com/maps/api/js">
-  <map center="current-location" zoom="3" style="height:650px">
+  <map center="current-location" zoom="10" style="height:650px">
   	<custom-marker ng-repeat="p in positions" position="{{p}}" title="pos: {{p}}">
       <div>
-        <img src="http://ladiesloot.com/wp-content/uploads/2015/05/smiley-face-1-4-15.png" alt="Smiley face" height="42" width="42">
+        <img ng-src="{{icon}}" alt="food truck image" height="42" width="42">
       </div>
     </custom-marker>
   </map>
